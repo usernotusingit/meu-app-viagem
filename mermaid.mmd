@@ -1,0 +1,49 @@
+flowchart TD
+    %% Frontend Initialization & Routing
+    A["Browser loads index.html"] --> B["main.jsx / index.jsx executes"]
+    B --> C["Import Tailwind CSS"]
+    B --> D["Render App component"]
+    D --> E["Setup React Router in App.jsx"]
+    E --> F["Route / renders HomePage.jsx"]
+    E --> G["Route /destination/:destinationId renders DestinationDetailPage.jsx"]
+
+    %% HomePage Flow
+    F --> H["HomePage.jsx"]
+    H --> I["Display SearchBar and DestinationList"]
+    I --> J["User enters query in SearchBar"]
+    J --> K["Call searchDestinations in api.jsx"]
+
+    %% Destination Card Navigation
+    I --> L["DestinationList renders DestinationCard components"]
+    L --> M["User clicks on a DestinationCard"]
+    M --> G
+
+    %% DestinationDetailPage Flow
+    G --> N["DestinationDetailPage.jsx mounts"]
+    N --> O["Call getDestinationDetails in api.jsx"]
+    N --> P["Call getDestinationInsights in api.jsx"]
+    N --> Q["Show LoadingSpinner during data fetch"]
+    O & P --> R["Render destination details and insights"]
+
+    %% Backend API Endpoints
+    subgraph API ["Backend API"]
+      S["GET /api/destinations?q=query"] --> T["destination_service.get_all_destinations(query)"]
+      T --> U["Load destinations.json"]
+      U --> V["Return destinations JSON"]
+
+      W["GET /api/destinations/:id"] --> X["destination_service.get_destination_by_id(id)"]
+      X --> U
+      X --> Y{"Destination found?"}
+      Y -- Yes --> Z["Return destination details JSON"]
+      Y -- No --> AA["Return 404 Error"]
+
+      AB["GET /api/destinations/:id/insights"] --> AC["destination_service.get_destination_by_id(id)"]
+      AC --> AD["Call ai_service.get_ai_insights_for_destination"]
+      AD --> AE["Call OpenAI API"]
+      AE --> AF["Return insights JSON"]
+    end
+
+    %% Linking Frontend API calls to Backend Endpoints
+    K -- "GET /api/destinations?q=query" --> S
+    O -- "GET /api/destinations/:id" --> W
+    P -- "GET /api/destinations/:id/insights" --> AB

@@ -1,0 +1,26 @@
+[
+    {
+      "id": "paris-fr",
+      "name": "Paris",
+      "country": "França",
+      "description": "A cidade da luz, famosa pela Torre Eiffel, museus e romance.",
+      "imageUrl": "https://images.unsplash.com/photo-1502602898657-3e91760c0341?q=80&w=1470&auto=format&fit=crop",
+      "popularity": 1
+    },
+    {
+      "id": "tokyo-jp",
+      "name": "Tóquio",
+      "country": "Japão",
+      "description": "Metrópole vibrante que mistura o ultramoderno com o tradicional.",
+      "imageUrl": "https://images.unsplash.com/photo-1542051841857-5f90071e7989?q=80&w=1470&auto=format&fit=crop",
+      "popularity": 2
+    },
+    {
+      "id": "rome-it",
+      "name": "Roma",
+      "country": "Itália",
+      "description": "História antiga encontra a vida moderna, do Coliseu à Fontana di Trevi.",
+      "imageUrl": "https://images.unsplash.com/photo-1552832230-c0197dd311b5?q=80&w=1374&auto=format&fit=crop",
+      "popularity": 3
+    }
+  ]
